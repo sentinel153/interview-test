@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
-import {bootstrapApplication} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
+  selector: 'app-to-do',
+  templateUrl: './to-do.component.html',
+  styleUrls: ['./to-do.component.css'], 
   template: `
     <h2>Todos</h2>
     <input #field />
@@ -13,9 +13,9 @@ import {bootstrapApplication} from '@angular/platform-browser';
     <p>
       <input type="checkbox" (change)="toggle($index)" />
       @if (todo.done) {
-      <s>{{ todo.text }}</s>
+      <s>{{{{ todo.text}}}}</s>
       } @else {
-      <span>{{ todo.text }}</span>
+      <span>{{{{ todo.text }}}}</span>
       }
     </p>
     } @empty {
@@ -23,7 +23,13 @@ import {bootstrapApplication} from '@angular/platform-browser';
     }
   `,
 })
-export class TodosComponent {
+export class ToDoComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
   todos: Array<{done: boolean; text: string}> = [];
 
   add(text: string) {
@@ -33,6 +39,6 @@ export class TodosComponent {
   toggle(index: number) {
     this.todos[index].done = !this.todos[index].done;
   }
+
 }
 
-bootstrapApplication(TodosComponent);
